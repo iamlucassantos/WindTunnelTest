@@ -1,0 +1,62 @@
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+
+data1=pd.read_csv("polar_Re0.700.txt", sep='\s+')
+data2=pd.read_csv("polar_Re1.000.txt", sep='\s+')
+data3=pd.read_csv("polar_Re1.300.txt", sep='\s+')
+
+alpha=np.array((data1.loc[1:18]['alpha'].to_numpy(dtype=float)))
+CL1=np.array((data1.loc[1:18]['CL'].to_numpy(dtype=float)))
+CD1=np.array((data1.loc[1:18]['CD'].to_numpy(dtype=float)))
+CM1=np.array((data1.loc[1:18]['Cm'].to_numpy(dtype=float)))
+
+CL2=np.array((data2.loc[1:18]['CL'].to_numpy(dtype=float)))
+CD2=np.array((data2.loc[1:18]['CD'].to_numpy(dtype=float)))
+CM2=np.array((data2.loc[1:18]['Cm'].to_numpy(dtype=float)))
+
+CL3=np.array((data3.loc[1:18]['CL'].to_numpy(dtype=float)))
+CD3=np.array((data3.loc[1:18]['CD'].to_numpy(dtype=float)))
+CM3=np.array((data3.loc[1:18]['Cm'].to_numpy(dtype=float)))
+thinairfoil=0.10966227*alpha
+plt.style.use('seaborn')
+plt.plot(alpha,CL1,'g-',marker='o',label="Re= 7.0E05")
+plt.plot(alpha,CL2,'p-', marker='^',label="Re= 1.0E06")
+plt.plot(alpha,CL3,'y-', marker='s',label="Re= 1.3E06")
+plt.plot(alpha,thinairfoil,':', marker='v')
+plt.xlabel("Angle of attack [deg]")
+plt.ylabel("Lift coefficient")
+plt.title("Lift coefficient vs AOA")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.plot(alpha,CD1,'g-',marker='o',label="Re= 7.0E05")
+plt.plot(alpha,CD2,'p-', marker='^',label="Re= 1.0E06")
+plt.plot(alpha,CD3,'y-', marker='s',label="Re= 1.3E06")
+plt.xlabel("Angle of attack [deg]")
+plt.ylabel("Drag coefficient")
+plt.title("Drag coefficient vs AOA")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.plot(alpha,CM1,'g-',marker='o',label="Re= 7.0E05")
+plt.plot(alpha,CM2,'p-', marker='^',label="Re= 1.0E06")
+plt.plot(alpha,CM3,'y-', marker='s',label="Re= 1.3E06")
+plt.xlabel("Angle of attack [deg]")
+plt.ylabel("Moment coefficient")
+plt.title("Moment coefficient vs AOA")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.plot(CD1,CL1,'g-',marker='o',label="Re= 7.0E05")
+plt.plot(CD2,CL2,'p-', marker='^',label="Re= 1.0E06")
+plt.plot(CD3,CL3,'y-', marker='s',label="Re= 1.3E06")
+plt.xlabel("Drag coefficient")
+plt.ylabel("Lift coefficient")
+plt.title("Drag coefficient vs Lift coefficient")
+plt.legend()
+plt.grid(True)
+plt.show()
