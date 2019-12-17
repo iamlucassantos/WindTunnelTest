@@ -18,18 +18,18 @@ for y_label in ['C_L', 'C_D', 'C_m']:
             plt.plot(experiment['alpha'], experiment[y_label], label="experimental", marker="o")
             val = "exp"
         elif i == 1:
-            plt.plot(simulation['alpha'], simulation[y_label], label="simulated", marker="x")
+            plt.plot(simulation['alpha'], simulation[y_label], label="XFLR5", marker="x")
             val = "sim"
         else:
             plt.plot(experiment['alpha'], experiment[y_label], label="experimental", marker="o")
-            plt.plot(simulation['alpha'], simulation[y_label], label="simulated", marker="x")
+            plt.plot(simulation['alpha'], simulation[y_label], label="XFLR5", marker="x")
             val = "exp_sim"
         plt.legend()
         plt.xlabel(r'$\alpha$ [deg]')
         plt.ylabel(f'${y_label}$ [-]')
         # plt.title(f'${["Lift", "Drag", "Moment"][["C_L", "C_D", "C_m"].index(y_label)]}$ curve')
         os.chdir('graphs')
-        plt.grid()
+        plt.grid(True)
         plt.savefig(f"alpha_vs_{y_label}_{val}.pdf", format='pdf')
         os.chdir('..')
         plt.show()
@@ -37,19 +37,19 @@ for y_label in ['C_L', 'C_D', 'C_m']:
 # Let's now make a drag polar.
 for i in range(3):
     if i == 0:
-        plt.plot(simulation['C_D'], simulation['C_L'], marker="x", label="simulation")
+        plt.plot(simulation['C_D'], simulation['C_L'], marker="x", label="XFLR5")
         val = "sim"
     elif i == 1:
         plt.plot(experiment['C_D'], experiment['C_L'], marker="o", label="experimental")
         val = "exp"
     else:
-        plt.plot(simulation['C_D'], simulation['C_L'], marker="x", label="simulation")
+        plt.plot(simulation['C_D'], simulation['C_L'], marker="x", label="XFLR5")
         plt.plot(experiment['C_D'], experiment['C_L'], marker="o", label="experimental")
         val = "exp_sim"
     plt.ylabel('Lift coefficient [-]')
     plt.xlabel('Drag coefficient [-]')
     os.chdir('graphs')
-    plt.grid()
+    plt.grid(True)
     plt.legend()
     plt.savefig(f'drag_polar_{val}.pdf', format='pdf')
     plt.show()
